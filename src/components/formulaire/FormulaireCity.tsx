@@ -24,7 +24,7 @@ const FormulaireCity = () => {
             setLongitude(data[0].lon);
         })
         .catch((error) => console.error(error));
-   }, [])
+   })
     
 
    //Je récupère les données de l'API avec la longitude et lattitude récupérer plus haut
@@ -37,11 +37,10 @@ const FormulaireCity = () => {
         })
    }
 
-   console.log(weatherData);
   return (
     <div>
         <form onSubmit={viewWeather}>
-            <label htmlFor="sity">Ville: </label>
+            <label htmlFor="city">Ville: </label>
             <input type="text" name="city" id="city" onChange={handleChange}/>
 
             <input type="submit" value="Search" />
