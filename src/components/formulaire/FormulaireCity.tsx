@@ -8,13 +8,14 @@ const FormulaireCity = () => {
 
     const [longitude, setLongitude] = useState(0);
 
-    const [weatherData, setWeatherData] = useState();
+    const [weatherData, setWeatherData] = useState(0);
 
     const [temperature, setTemperature] = useState(0);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCity(event.target.value);
     }
+
 
     //Je récupère la longitude et lattitude et je l'insert dans mes useState
    useEffect(() => {
@@ -24,7 +25,7 @@ const FormulaireCity = () => {
             setLongitude(data[0].lon);
         })
         .catch((error) => console.error(error));
-   })
+   }, [city])
     
 
    //Je récupère les données de l'API avec la longitude et lattitude récupérer plus haut
@@ -40,15 +41,16 @@ const FormulaireCity = () => {
   return (
     <div>
         <form onSubmit={viewWeather}>
-            <label htmlFor="city">Ville: </label>
+            <label htmlFor="city">Météo de votre ville: </label>
             <input type="text" name="city" id="city" onChange={handleChange}/>
 
             <input type="submit" value="Search" />
+            
         </form>
-        <div>
+        {weatherData !== 0 && <div>
             <h2>Il fait : {weatherData}</h2>
-            <p>Temperature: {temperature}°C</p>
-        </div>
+            <p>Température: {temperature}°C</p>
+        </div>}
     </div>
   )
 }
